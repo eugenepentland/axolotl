@@ -172,7 +172,7 @@ def train(
         config = choose_config(config)
 
     # load the config from the yaml file
-    config = "examples/openllama-3b/qlora.yaml"
+    config = "examples/openllama-3b/qlora.yml"
     with open(config, encoding="utf-8") as file:
         cfg: DictDefault = DictDefault(yaml.safe_load(file))
     # if there are any options passed in the cli, if it is something that seems valid from the yaml,
