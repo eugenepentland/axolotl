@@ -8,6 +8,7 @@ import signal
 import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
+from pprint import pprint
 import os
 import fire
 import torch
@@ -182,7 +183,7 @@ def train(
 
     # if there are any options passed in the cli, if it is something that seems valid from the yaml,
     # then overwrite the value
-    print(kwargs)
+    pprint(kwargs)
     for k, v in kwargs.items():
         # if not strict, allow writing to cfg even if it's not in the yml already
         if k in cfg_keys or not cfg.strict:
@@ -191,7 +192,7 @@ def train(
                 cfg[k] = bool(v)
             else:
                 cfg[k] = json.loads(v)
-    print(cfg)
+    pprint(cfg)
     validate_config(cfg)
 
     # setup some derived config / hyperparams
