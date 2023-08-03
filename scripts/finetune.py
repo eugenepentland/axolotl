@@ -175,6 +175,7 @@ def train(
 
     if config == "wandb":
         cfg: DictDefault = DictDefault(get_config_from_wandb())
+        wandb.init(reinit=True, allow_val_change=True)
     elif config:
         with open(config, encoding="utf-8") as file:
             cfg: DictDefault = DictDefault(yaml.safe_load(file))
