@@ -8,7 +8,6 @@ def get_config_from_wandb():
     project = os.environ.get("WANDB_PROJECT")
     run_string = f"/{entity}/{project}/runs/{run_id}"
     run = wandb.Api().run(run_string)
-    run.detach()
     return run.config
 
 def setup_wandb_env_vars(cfg):
