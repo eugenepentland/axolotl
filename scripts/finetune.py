@@ -173,7 +173,7 @@ def train(
     #    config = choose_config(config)
 
     if config == "wandb":
-        cfg = {"strict": False}
+        cfg: DictDefault = DictDefault({"strict": False})
     elif config:
         with open(config, encoding="utf-8") as file:
             cfg: DictDefault = DictDefault(yaml.safe_load(file))
@@ -190,7 +190,7 @@ def train(
                 cfg[k] = bool(v)
             else:
                 cfg[k] = json.loads(v)
-
+    print(cfg)
     validate_config(cfg)
 
     # setup some derived config / hyperparams
