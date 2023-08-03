@@ -197,7 +197,7 @@ def train(
                 cfg[k] = v
             else:
                 cfg[k] = json.loads(str(v).replace("'", '"'))
-            print("casted",k, "to", cfg[k])
+            print("casted",k, "to", cfg[k], type(cfg[k]))
     print("Loading the config")
     pprint(cfg)
     validate_config(cfg)
