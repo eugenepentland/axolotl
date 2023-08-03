@@ -182,6 +182,7 @@ def train(
 
     # if there are any options passed in the cli, if it is something that seems valid from the yaml,
     # then overwrite the value
+    print(kwargs)
     for k, v in kwargs.items():
         # if not strict, allow writing to cfg even if it's not in the yml already
         if k in cfg_keys or not cfg.strict:
