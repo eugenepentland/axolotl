@@ -174,7 +174,8 @@ def train(
 
     # load the config from the yaml file
     if config == "wandb":
-        cfg = get_config_from_wandb()
+        run = wandb.init()
+        cfg = run.config['axolotl']
     elif config:
         with open(config, encoding="utf-8") as file:
             cfg: DictDefault = DictDefault(yaml.safe_load(file))
