@@ -8,9 +8,10 @@ import signal
 import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
-import wandb
+import os
 import fire
 import torch
+import wandb
 import yaml
 
 # add src to the pythonpath so we don't need to pip install this
@@ -168,14 +169,12 @@ def train(
     prepare_ds_only: bool = False,
     **kwargs,
 ):
-    if Path(config).is_dir():
-        config = choose_config(config)
+    #if Path(config).is_dir():
+    #    config = choose_config(config)
 
     # load the config from the yaml file
     if config == "wandb":
-        with wandb.init() as run:
-            print(run)
-            print(run.config)
+        print(wandb.run, wandb.config)
     elif config:
         with open(config, encoding="utf-8") as file:
             cfg: DictDefault = DictDefault(yaml.safe_load(file))
