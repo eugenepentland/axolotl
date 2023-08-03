@@ -195,7 +195,7 @@ def train(
             elif isinstance(v, int):
                 cfg[k] = v
             else:
-                v = str(v).replace("__",",")
+                v = str(v).replace("___",'"').replace("##",",")
                 cfg[k] = json.loads(str(v))
             print(type(cfg[k]))
     print("Loading the config")
