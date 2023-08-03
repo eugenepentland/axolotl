@@ -8,7 +8,7 @@ import signal
 import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
-
+import wandb
 import fire
 import torch
 import yaml
@@ -172,12 +172,16 @@ def train(
         config = choose_config(config)
 
     # load the config from the yaml file
-    if config:
+    if config == "wandb":
+        with wandb.init() as run:
+            print(run)
+            print(run.config)
+    elif config:
         with open(config, encoding="utf-8") as file:
             cfg: DictDefault = DictDefault(yaml.safe_load(file))
-        cfg_keys = cfg.keys()
-    else:
-        cfg_keys = {}
+            
+    cfg_keys = cfg.keys()
+
     # if there are any options passed in the cli, if it is something that seems valid from the yaml,
     # then overwrite the value
     for k, _ in kwargs.items():
