@@ -13,7 +13,7 @@ import fire
 import torch
 import wandb
 import yaml
-
+import json
 # add src to the pythonpath so we don't need to pip install this
 from optimum.bettertransformer import BetterTransformer
 from transformers import GenerationConfig, TextStreamer
@@ -173,10 +173,8 @@ def train(
     #    config = choose_config(config)
 
     # load the config from the yaml file
-    if config == "wandb":
-        run = wandb.init()
-        print("config", run._run_obj)
-        cfg = run.config['axolotl']
+    if config == "wandb" and kwargs['--json_string']:
+        cfg: DictDefault = DictDefault(json.loads(kwargs['--json_string']))
     elif config:
         with open(config, encoding="utf-8") as file:
             cfg: DictDefault = DictDefault(yaml.safe_load(file))
