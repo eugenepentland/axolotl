@@ -192,6 +192,7 @@ def train(
             if isinstance(cfg[k], bool):
                 cfg[k] = bool(v)
             else:
+                print("turning value into json", v)
                 cfg[k] = json.loads(v)
     print("Loading the config")
     pprint(cfg)
