@@ -172,12 +172,8 @@ def train(
     #if Path(config).is_dir():
     #    config = choose_config(config)
 
-    # load the config from the yaml file
-    print(kwargs)
-    if config == "wandb" and kwargs['json_string']:
-        kwargs['json_string'] = kwargs['json_string'].replace("__", ',')
-        print(kwargs['json_string'])
-        cfg: DictDefault = DictDefault(json.loads(kwargs['json_string']))
+    if config == "wandb":
+        cfg = {"strict": False}
     elif config:
         with open(config, encoding="utf-8") as file:
             cfg: DictDefault = DictDefault(yaml.safe_load(file))
@@ -186,14 +182,14 @@ def train(
 
     # if there are any options passed in the cli, if it is something that seems valid from the yaml,
     # then overwrite the value
-    for k, _ in kwargs.items():
+    for k, v in kwargs.items():
         # if not strict, allow writing to cfg even if it's not in the yml already
         if k in cfg_keys or not cfg.strict:
             # handle booleans
             if isinstance(cfg[k], bool):
-                cfg[k] = bool(kwargs[k])
+                cfg[k] = bool(v)
             else:
-                cfg[k] = kwargs[k]
+                cfg[k] = json.loads(v)
 
     validate_config(cfg)
 
