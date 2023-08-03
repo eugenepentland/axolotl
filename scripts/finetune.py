@@ -200,7 +200,7 @@ def train(
             print(type(cfg[k]))
     print("Loading the config")
     pprint(cfg.items())
-    pprint(cfg)
+    pprint(cfg['datasets'])
     validate_config(cfg)
 
     # setup some derived config / hyperparams
