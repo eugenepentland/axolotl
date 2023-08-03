@@ -193,7 +193,7 @@ def train(
                 cfg[k] = bool(v)
             else:
                 print("turning value into json", v)
-                cfg[k] = json.loads(v)
+                cfg[k] = json.loads(str(v))
     print("Loading the config")
     pprint(cfg)
     validate_config(cfg)
