@@ -197,7 +197,7 @@ def train(
             elif isinstance(v, int):
                 cfg[k] = v
             else:
-                cfg[k] = json.loads(str(v))
+                cfg[k] = json.loads(str(v).replace("'", '"'))
     print("Loading the config")
     pprint(cfg)
     validate_config(cfg)
