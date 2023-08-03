@@ -176,6 +176,7 @@ def train(
     print(kwargs)
     if config == "wandb" and kwargs['json_string']:
         kwargs['json_string'] = kwargs['json_string'].replace("__", ',')
+        print(kwargs['json_string'])
         cfg: DictDefault = DictDefault(json.loads(kwargs['json_string']))
     elif config:
         with open(config, encoding="utf-8") as file:
