@@ -17,7 +17,7 @@ import yaml
 # add src to the pythonpath so we don't need to pip install this
 from optimum.bettertransformer import BetterTransformer
 from transformers import GenerationConfig, TextStreamer
-
+import os
 from axolotl.logging_config import configure_logging
 from axolotl.utils.data import load_prepare_datasets, load_pretraining_dataset
 from axolotl.utils.dict import DictDefault
@@ -174,7 +174,7 @@ def train(
 
     # load the config from the yaml file
     if config == "wandb":
-        print(wandb.run, wandb.config)
+        print("Environment Variables", os.environ["WANDB_PROJECT"], os.environ["WANDB_ENTITY"])
     elif config:
         with open(config, encoding="utf-8") as file:
             cfg: DictDefault = DictDefault(yaml.safe_load(file))
