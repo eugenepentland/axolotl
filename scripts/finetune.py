@@ -176,7 +176,7 @@ def train(
     if config == "wandb":
         config = "examples/openllama-3b/config.yml"
         #cfg: DictDefault = DictDefault({"strict": False})
-    elif config:
+    if config:
         with open(config, encoding="utf-8") as file:
             cfg: DictDefault = DictDefault(yaml.safe_load(file))
             
