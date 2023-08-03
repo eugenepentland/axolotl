@@ -174,7 +174,7 @@ def train(
     #    config = choose_config(config)
 
     if config == "wandb":
-        cfg: DictDefault = DictDefault({"strict": False})
+        cfg = {"strict": False}
     elif config:
         with open(config, encoding="utf-8") as file:
             cfg: DictDefault = DictDefault(yaml.safe_load(file))
@@ -196,7 +196,7 @@ def train(
             elif isinstance(v, int):
                 cfg[k] = v
             else:
-                cfg[k] = json.loads(str(v).replace("'", '"'))
+                cfg[k] = json.loads(str(v).replace("'", '"').replace(",","__"))
             print("casted",k, "to", cfg[k], type(cfg[k]))
     print("Loading the config")
     pprint(cfg)
