@@ -189,7 +189,7 @@ def train(
         # if not strict, allow writing to cfg even if it's not in the yml already
         if k in cfg_keys or not cfg.strict:
             # handle booleans
-            print("casting", v)
+            print("casting",k, "to", v)
             if isinstance(cfg[k], bool):
                 cfg[k] = bool(v)
             elif isinstance(v, str):
