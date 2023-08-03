@@ -199,7 +199,8 @@ def train(
                 cfg[k] = json.loads(str(v))
             print(type(cfg[k]))
     print("Loading the config")
-    pprint(cfg.keys(), cfg.values())
+    pprint(cfg.keys())
+    print(cfg.values())
     pprint(cfg['datasets'], type(cfg['datasets']))
     validate_config(cfg)
 
