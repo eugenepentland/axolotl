@@ -25,7 +25,7 @@ from axolotl.utils.models import load_model, load_tokenizer
 from axolotl.utils.tokenization import check_dataset_labels
 from axolotl.utils.trainer import setup_trainer
 from axolotl.utils.validation import validate_config
-from axolotl.utils.wandb import setup_wandb_env_vars
+from axolotl.utils.wandb import setup_wandb_env_vars, get_config_from_wandb
 
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 src_dir = os.path.join(project_root, "src")
@@ -174,7 +174,7 @@ def train(
 
     # load the config from the yaml file
     if config == "wandb":
-        print("Environment Variables", os.environ["WANDB_PROJECT"], os.environ["WANDB_ENTITY"])
+        cfg = get_config_from_wandb()
     elif config:
         with open(config, encoding="utf-8") as file:
             cfg: DictDefault = DictDefault(yaml.safe_load(file))
