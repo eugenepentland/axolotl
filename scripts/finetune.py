@@ -183,6 +183,7 @@ def train(
 
     # if there are any options passed in the cli, if it is something that seems valid from the yaml,
     # then overwrite the value
+    print("Loading the kwargs")
     pprint(kwargs)
     for k, v in kwargs.items():
         # if not strict, allow writing to cfg even if it's not in the yml already
@@ -192,6 +193,7 @@ def train(
                 cfg[k] = bool(v)
             else:
                 cfg[k] = json.loads(v)
+    print("Loading the config")
     pprint(cfg)
     validate_config(cfg)
 
