@@ -172,12 +172,14 @@ def train(
         config = choose_config(config)
 
     # load the config from the yaml file
-    config = "examples/openllama-3b/qlora.yml"
-    with open(config, encoding="utf-8") as file:
-        cfg: DictDefault = DictDefault(yaml.safe_load(file))
+    if config:
+        with open(config, encoding="utf-8") as file:
+            cfg: DictDefault = DictDefault(yaml.safe_load(file))
+        cfg_keys = cfg.keys()
+    else:
+        cfg_keys = {}
     # if there are any options passed in the cli, if it is something that seems valid from the yaml,
     # then overwrite the value
-    cfg_keys = cfg.keys()
     for k, _ in kwargs.items():
         # if not strict, allow writing to cfg even if it's not in the yml already
         if k in cfg_keys or not cfg.strict:
