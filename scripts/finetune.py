@@ -174,9 +174,8 @@ def train(
     #    config = choose_config(config)
 
     if config == "wandb":
-        config = "examples/openllama-3b/qlora.yml"
-        #cfg: DictDefault = DictDefault({"strict": False})
-    if config:
+        cfg: DictDefault = DictDefault(get_config_from_wandb())
+    elif config:
         with open(config, encoding="utf-8") as file:
             cfg: DictDefault = DictDefault(yaml.safe_load(file))
             
