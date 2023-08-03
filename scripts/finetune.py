@@ -173,6 +173,7 @@ def train(
     #    config = choose_config(config)
 
     # load the config from the yaml file
+    print(kwargs)
     if config == "wandb" and kwargs['--json_string']:
         cfg: DictDefault = DictDefault(json.loads(kwargs['--json_string']))
     elif config:
