@@ -189,7 +189,6 @@ def train(
         # if not strict, allow writing to cfg even if it's not in the yml already
         if k in cfg_keys or not cfg.strict:
             # handle booleans
-            print("casting",k, "to", v)
             if isinstance(cfg[k], bool):
                 cfg[k] = bool(v)
             elif isinstance(v, str):
@@ -198,6 +197,7 @@ def train(
                 cfg[k] = v
             else:
                 cfg[k] = json.loads(str(v).replace("'", '"'))
+            print("casted",k, "to", cfg[k])
     print("Loading the config")
     pprint(cfg)
     validate_config(cfg)
