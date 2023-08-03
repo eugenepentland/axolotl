@@ -199,7 +199,7 @@ def train(
                 cfg[k] = json.loads(str(v))
             print(type(cfg[k]))
     print("Loading the config")
-    pprint(cfg)
+    pprint(cfg.items())
     validate_config(cfg)
 
     # setup some derived config / hyperparams
