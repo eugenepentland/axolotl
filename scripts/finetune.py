@@ -191,8 +191,6 @@ def train(
             # handle booleans
             if isinstance(cfg[k], bool):
                 cfg[k] = bool(v)
-            elif isinstance(v, str):
-                cfg[k] = v 
             elif isinstance(v, int):
                 cfg[k] = v
             else:
