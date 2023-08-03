@@ -1,7 +1,15 @@
 """Module for wandb utilities"""
-
+import wandb
 import os
 
+def get_config_from_wandb():
+    run_id = os.environ.get("WANDB_RUN_ID")
+    entity = os.environ.get("WANDB_ENTITY")
+    project = os.environ.get("WANDB_PROJECT")
+    run_string = f"/{entity}/{project}/runs/{run_id}"
+    run = wandb.Api().run(run_string)
+
+    return run.config
 
 def setup_wandb_env_vars(cfg):
     if cfg.wandb_mode and cfg.wandb_mode == "offline":
