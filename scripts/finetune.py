@@ -177,6 +177,7 @@ def train(
         run = get_run_from_wandb()
         
         cfg: DictDefault = DictDefault(run.config)
+        cfg['use_wandb'] = True
         
     elif config:
         with open(config, encoding="utf-8") as file:
@@ -195,17 +196,9 @@ def train(
             print("casted",k, "to", v)
             if isinstance(cfg[k], bool):
                 cfg[k] = bool(v)
-            elif isinstance(v, int):
-                cfg[k] = v
             else:
-                v = str(v).replace("___",'"').replace("##",",")
-                cfg[k] = json.loads(str(v))
-            print(type(cfg[k]))
-    print("Loading the config")
-    pprint(cfg.keys())
-    print(cfg.values())
-    pprint(cfg['datasets'])
-    pprint(type(cfg['datasets']))
+                cfg[k] = v
+                
     validate_config(cfg)
 
     # setup some derived config / hyperparams
