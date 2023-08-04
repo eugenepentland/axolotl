@@ -177,7 +177,7 @@ def train(
         run = get_run_from_wandb()
         
         cfg: DictDefault = DictDefault(run.config)
-        os.config["WANDB_RUN_ID"] = ""
+        os.environ["WANDB_RUN_ID"] = ""
         run.delete()
         cfg['use_wandb'] = True
         
