@@ -174,8 +174,9 @@ def train(
         config = choose_config(config)
 
     if config == "wandb":
-        cfg: DictDefault = DictDefault(get_config_from_wandb())
-        wandb.init(allow_val_change=True)
+        run = wandb.init(id=os.environ["WANDB_RUN_ID"], resume="allow", allow_val_change=True)
+        cfg: DictDefault = DictDefault(run.config)
+        
     elif config:
         with open(config, encoding="utf-8") as file:
             cfg: DictDefault = DictDefault(yaml.safe_load(file))
