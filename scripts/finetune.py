@@ -177,6 +177,7 @@ def train(
         run = get_run_from_wandb()
         
         cfg: DictDefault = DictDefault(run.config)
+        run.delete()
         cfg['use_wandb'] = True
         
     elif config:
@@ -198,7 +199,7 @@ def train(
                 cfg[k] = bool(v)
             else:
                 cfg[k] = v
-                
+
     validate_config(cfg)
 
     # setup some derived config / hyperparams
