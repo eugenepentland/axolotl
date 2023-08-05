@@ -176,14 +176,17 @@ def train(
 
     if config == "wandb":
         acc = Accelerator(log_with="wandb")
-        acc.init_trackers(os.environ['WANDB_PROJECT'])
+        if acc.is_main_process:
+            acc.init_trackers(os.environ["WANDB_PROJECT"])
+        
+
         run_config = json.loads(os.environ['WANDB_CONFIG'])
         cfg: DictDefault = DictDefault(run_config)
         cfg['use_wandb'] = True
         
-    elif config:
-        with open(config, encoding="utf-8") as file:
-            cfg: DictDefault = DictDefault(yaml.safe_load(file))
+    
+    with open(config, encoding="utf-8") as file:
+        cfg: DictDefault = DictDefault(yaml.safe_load(file))
             
     cfg_keys = cfg.keys()
 
