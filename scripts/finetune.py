@@ -177,8 +177,8 @@ def train(
     if config == "wandb":
         acc = Accelerator(log_with="wandb",
                           num_processes=2)
-        #if acc.is_main_process:
-        acc.init_trackers(os.environ["WANDB_PROJECT"])
+        if acc.is_main_process:
+            acc.init_trackers(os.environ["WANDB_PROJECT"])
         
 
         run_config = json.loads(os.environ['WANDB_CONFIG'])
