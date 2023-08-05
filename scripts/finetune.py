@@ -175,9 +175,11 @@ def train(
         config = choose_config(config)
 
     if config == "wandb":
-        acc = Accelerator(log_with="wandb")
+        if not wandb.run:
+            wandb.init()
+        #acc = Accelerator(log_with="wandb")
         #if acc.is_main_process:
-        acc.init_trackers(os.environ["WANDB_PROJECT"])
+        #acc.init_trackers(os.environ["WANDB_PROJECT"])
         wandb.watch()
         
 
