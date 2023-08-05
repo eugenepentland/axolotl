@@ -184,9 +184,9 @@ def train(
         cfg: DictDefault = DictDefault(run_config)
         cfg['use_wandb'] = True
         
-    
-    with open(config, encoding="utf-8") as file:
-        cfg: DictDefault = DictDefault(yaml.safe_load(file))
+    elif config:
+        with open(config, encoding="utf-8") as file:
+            cfg: DictDefault = DictDefault(yaml.safe_load(file))
             
     cfg_keys = cfg.keys()
 
