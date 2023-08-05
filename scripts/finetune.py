@@ -174,12 +174,9 @@ def train(
         config = choose_config(config)
 
     if config == "wandb":
-        if not wandb.run:
-            run = get_run_from_wandb()
+        run = wandb.init()
         
         cfg: DictDefault = DictDefault(run.config)
-        os.environ["WANDB_RUN_ID"] = "dfsf"
-        run.delete()
         cfg['use_wandb'] = True
         
     elif config:
