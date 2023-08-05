@@ -27,6 +27,7 @@ from axolotl.utils.tokenization import check_dataset_labels
 from axolotl.utils.trainer import setup_trainer
 from axolotl.utils.validation import validate_config
 from axolotl.utils.wandb import setup_wandb_env_vars, get_run_from_wandb
+from accelerate import Accelerator
 
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 src_dir = os.path.join(project_root, "src")
@@ -174,6 +175,8 @@ def train(
         config = choose_config(config)
 
     if config == "wandb":
+        acc = Accelerator(log_with="wandb")
+        acc.init_trackers(os.environ['WANDB_PROJECT'])
         run_config = json.loads(os.environ['WANDB_CONFIG'])
         cfg: DictDefault = DictDefault(run_config)
         cfg['use_wandb'] = True
