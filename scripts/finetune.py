@@ -176,21 +176,9 @@ def train(
 
     
     if config == "wandb":
-        #wandb.init(group="testing")
-        #accelerator = Accelerator(log_with="wandb")
-        #if accelerator.is_main_process:
-        #    accelerator.init_trackers("jobs")
-        os.environ["WANDB_RUN_GROUP"] = "experiment-" + "wandb.util.generate_id()"
-        wandb.init(magic=True, group=os.environ["WANDB_RUN_GROUP"])
-    #\accelerator.init_trackers(os.environ['WANDB_PROJECT'])
-    #accelerator.init_trackers("jobs")
-        #wandb.init(magic=True, id="testing234", allow_val_change=True)
-
-
+        wandb.init(group=os.environ["WANDB_RUN_ID"])
         run_config = json.loads(os.environ['WANDB_CONFIG'])
         cfg: DictDefault = DictDefault(run_config)
-        cfg['use_wandb'] = True
-        
     elif config:
         with open(config, encoding="utf-8") as file:
            cfg: DictDefault = DictDefault(yaml.safe_load(file))
