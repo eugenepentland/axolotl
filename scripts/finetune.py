@@ -171,8 +171,8 @@ def train(
     prepare_ds_only: bool = False,
     **kwargs,
 ):
-    if Path(config).is_dir():
-        config = choose_config(config)
+    #if Path(config).is_dir():
+    #    config = choose_config(config)
 
     
     if config == "wandb":
