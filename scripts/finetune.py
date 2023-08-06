@@ -175,7 +175,10 @@ def train(
         config = choose_config(config)
 
     if config == "wandb":
-        wandb.init(magic=True, id="testing234", allow_val_change=True)
+        accelerator = Accelerator(log_with="wandb")
+        if accelerator.is_local_main_process:
+            accelerator.init_trackers(os.environ['WANDB_PROJECT'])
+        #wandb.init(magic=True, id="testing234", allow_val_change=True)
 
         run_config = json.loads(os.environ['WANDB_CONFIG'])
         cfg: DictDefault = DictDefault(run_config)
