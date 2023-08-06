@@ -175,8 +175,6 @@ def train(
         config = choose_config(config)
 
     if config == "wandb":
-        #run = get_run_from_wandb()
-        Accelerator(log_with="wandb")
         wandb.init(magic=True)
 
         run_config = json.loads(os.environ['WANDB_CONFIG'])
