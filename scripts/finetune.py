@@ -174,22 +174,23 @@ def train(
     if Path(config).is_dir():
         config = choose_config(config)
 
-    #if config == "wandb":
-    accelerator = Accelerator(log_with="wandb")
-    if accelerator.is_main_process:
-        accelerator.init_trackers("jobs")
+    if config == "wandb":
+        accelerator = Accelerator(log_with="wandb")
+        if accelerator.is_main_process:
+            accelerator.init_trackers("jobs")
         #wandb.init(magic=True)
     #\accelerator.init_trackers(os.environ['WANDB_PROJECT'])
     #accelerator.init_trackers("jobs")
         #wandb.init(magic=True, id="testing234", allow_val_change=True)
 
-    run_config = json.loads(os.environ['WANDB_CONFIG'])
-    cfg: DictDefault = DictDefault(run_config)
-    cfg['use_wandb'] = True
+
+        run_config = json.loads(os.environ['WANDB_CONFIG'])
+        cfg: DictDefault = DictDefault(run_config)
+        cfg['use_wandb'] = True
         
-    #elif config:
-    #    with open(config, encoding="utf-8") as file:
-     ##       cfg: DictDefault = DictDefault(yaml.safe_load(file))
+    elif config:
+        with open(config, encoding="utf-8") as file:
+           cfg: DictDefault = DictDefault(yaml.safe_load(file))
             
     cfg_keys = cfg.keys()
 
