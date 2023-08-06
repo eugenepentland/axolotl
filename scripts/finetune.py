@@ -180,7 +180,7 @@ def train(
         #accelerator = Accelerator(log_with="wandb")
         #if accelerator.is_main_process:
         #    accelerator.init_trackers("jobs")
-        os.environ["WANDB_RUN_GROUP"] = "experiment-" + wandb.util.generate_id()
+        os.environ["WANDB_RUN_GROUP"] = "experiment-" + "wandb.util.generate_id()"
         wandb.init(magic=True, group=os.environ["WANDB_RUN_GROUP"])
     #\accelerator.init_trackers(os.environ['WANDB_PROJECT'])
     #accelerator.init_trackers("jobs")
