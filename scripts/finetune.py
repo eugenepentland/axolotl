@@ -177,10 +177,10 @@ def train(
     
     if config == "wandb":
         #wandb.init(group="testing")
-        accelerator = Accelerator(log_with="wandb")
-        if accelerator.is_main_process:
-            accelerator.init_trackers("jobs")
-        #wandb.init(magic=True)
+        #accelerator = Accelerator(log_with="wandb")
+        #if accelerator.is_main_process:
+        #    accelerator.init_trackers("jobs")
+        wandb.init(magic=True, group="testing324")
     #\accelerator.init_trackers(os.environ['WANDB_PROJECT'])
     #accelerator.init_trackers("jobs")
         #wandb.init(magic=True, id="testing234", allow_val_change=True)
