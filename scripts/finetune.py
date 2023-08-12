@@ -176,9 +176,11 @@ def train(
 
     
     if config == "wandb":
-        #wandb.init(
-        #    group=os.environ["WANDB_RUN_ID"]
-        #    )
+        group = os.environ["WANDB_RUN_ID"]
+        os.environ['WANDB_RUN_ID'] = None
+        wandb.init(
+            group=group
+            )
         run_config = json.loads(os.environ['WANDB_CONFIG'])
         cfg: DictDefault = DictDefault(run_config)
     elif config:
